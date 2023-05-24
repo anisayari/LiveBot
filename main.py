@@ -97,8 +97,9 @@ class RobotApp:
         self.root.after(200, self.switch_robot)
 
     def switch_robot(self):
+        old_robot = self.robots[self.current_robot]
         self.current_robot = (self.current_robot + 1) % len(self.robots)
-
+        self.robots[self.current_robot].text = old_robot.text
         self.robots[self.current_robot].set_talking(True)
         self.robots[(self.current_robot + 1) % len(self.robots)].set_talking(False)
 
@@ -123,6 +124,12 @@ class RobotApp:
             for event in pygame.event.get():
                 if event.type == pygame.USEREVENT:
                     print("Finished.")
+                    self.robots[self.current_robot].is_talking = False
+                    self.switch_robot()
+                    # Call tick() method again after the audio has finished playing
+                    self.robots[self.current_robot].tick()
+                if event.type == pygame.KEYDOWN:
+                    print("change robot manually")
                     self.robots[self.current_robot].is_talking = False
                     self.switch_robot()
                     # Call tick() method again after the audio has finished playing
