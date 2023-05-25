@@ -97,8 +97,9 @@ class RobotApp:
         self.root.after(200, self.switch_robot)
 
     def switch_robot(self):
+        old_robot = self.robots[self.current_robot]
         self.current_robot = (self.current_robot + 1) % len(self.robots)
-
+        self.robots[self.current_robot].text = old_robot.text
         self.robots[self.current_robot].set_talking(True)
         self.robots[(self.current_robot + 1) % len(self.robots)].set_talking(False)
 
