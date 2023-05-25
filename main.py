@@ -128,12 +128,6 @@ class RobotApp:
                     self.switch_robot()
                     # Call tick() method again after the audio has finished playing
                     self.robots[self.current_robot].tick()
-                if event.type == pygame.KEYDOWN:
-                    print("change robot manually")
-                    self.robots[self.current_robot].is_talking = False
-                    self.switch_robot()
-                    # Call tick() method again after the audio has finished playing
-                    self.robots[self.current_robot].tick()
 
             # Update Tkinter's event loop
             self.root.update_idletasks()
